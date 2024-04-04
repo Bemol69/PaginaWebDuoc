@@ -1,0 +1,47 @@
+/* Estilos personalizados */
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel-item img {
+    height: 550px;
+    object-fit: cover;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  footer {
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .cart-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s;
+  }
+  
+  .cart-icon:hover {
+    transform: scale(1.2);
+  }
