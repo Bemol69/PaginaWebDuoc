@@ -1,0 +1,30 @@
+
+
+
+/* ---- LOGIN REGISTER ------*/
+.gradient-custom-2 {
+    /* Fondo de degradado */
+    background: #747372; /* Fallback para navegadores antiguos */
+    background: -webkit-linear-gradient(to right, #ff0000, #fc5000 ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ff0000, #fc5000 ); /* Estándar W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  
+  
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem; /* Redondear borde superior derecho */
+    border-bottom-right-radius: .3rem; /* Redondear borde inferior derecho */
+  }
+
+  .gradient-form {
+    /* Establece la imagen de fondo y ajusta otras propiedades */
+    background-image: url('imagenes/fondo.jpg'); /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta de tu imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el área */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center; /* Centra la imagen */
+  }
+
+  /*---FONDO PARA EL BODY  -----------*/
+body{
+  background-image: url('imagenes/fondo.jpg');
+  background-size: cover;
+}

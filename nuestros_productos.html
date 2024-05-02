@@ -22,13 +22,13 @@
               <a class="nav-link" href="index.html">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="ubicacion.html">Ubicacion</a>
+              <a class="nav-link" href="ubicacion.html">Dónde Encontrarnos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="sobre_nosotros.html">Sobre Nosotros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contactanos.html">Contactos y Redes</a>
+              <a class="nav-link" href="contactanos.html">Contactanos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="nuestros_productos.html">Nuestros Productos</a>
@@ -37,6 +37,11 @@
               <a class="nav-link" href="#" id="cart-btn">
                 <img src="imagenes/carrito.png" alt="Carrito" style="width: 24px; height: 24px;">
                 <span id="cart-count">0</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ingreso.html" target="_blank">
+                <img src="imagenes/usuario.png" alt="logo usuario" width="40" height="40" style="margin-right: -70px; border-radius: 50%; ">
               </a>
             </li>
           </ul>
@@ -49,7 +54,7 @@
     <div class="card">
       <div class="card-header">
         <h5 class="card-title">Carrito de Compras</h5>
-        <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close float-end" aria-label="Close"></button>
       </div>
       <div class="card-body" id="cart-content">
         <!-- El contenido del carrito se mostrará aquí -->
@@ -85,10 +90,10 @@
         const DOMitems = document.querySelector('#items');
         const DOMcarrito = document.querySelector('#cart-content');
         const DOMtotal = document.querySelector('#total');
-        const DOMbotonVaciar = document.querySelector('#boton-vaciar');
         const DOMcartBtn = document.querySelector('#cart-btn');
         const DOMcartContainer = document.querySelector('#cart-container');
-  
+        const closeCartBtn = document.querySelector('.btn-close');
+
         // Funciones
         function renderizarProductos() {
           baseDeDatos.forEach((info) => {
@@ -114,146 +119,135 @@
             miNodoPrecio.classList.add('card-text');
             miNodoPrecio.textContent = `${info.precio}${divisa}`;
   
-            const miNodoBoton = document.createElement('button');
-            miNodoBoton.classList.add('btn', 'btn-primary');
-            miNodoBoton.textContent = 'Agregar al Carrito';
-            miNodoBoton.setAttribute('marcador', info.id);
-            miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
-  
-            // Insertamos
-            miNodoCardBody.appendChild(miNodoTitle);
-            miNodoCardBody.appendChild(miNodoImagen);
-            miNodoCardBody.appendChild(miNodoPrecio);
-            miNodoCardBody.appendChild(miNodoBoton);
-            miNodoCard.appendChild(miNodoCardBody);
-            miNodo.appendChild(miNodoCard);
-            DOMitems.appendChild(miNodo);
-          });
-        }
-  
-        function anyadirProductoAlCarrito(evento) {
-          carrito.push(evento.target.getAttribute('marcador'));
-          renderizarCarrito();
-        }
-  
-        function renderizarCarrito() {
-          DOMcarrito.textContent = '';
-          const carritoSinDuplicados = [...new Set(carrito)];
-          carritoSinDuplicados.forEach((item) => {
-            const miItem = baseDeDatos.filter((itemBaseDatos) => {
-              return itemBaseDatos.id === parseInt(item);
-            });
-            const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-              return itemId === item ? total += 1 : total;
-            }, 0);
-            const miNodo = document.createElement('div');
-            miNodo.classList.add('row', 'mb-2');
-            miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
-            const miBoton = document.createElement('button');
-            miBoton.classList.add('btn', 'btn-danger', 'ms-2');
-            miBoton.textContent = 'X';
-            miBoton.dataset.item = item;
-            miBoton.addEventListener('click', borrarItemCarrito);
-            miNodo.appendChild(miBoton);
-            DOMcarrito.appendChild(miNodo);
-          });
-          DOMtotal.textContent = calcularTotal();
-        }
+  const miNodoBoton = document.createElement('button');
+  miNodoBoton.classList.add('btn', 'btn-primary');
+  miNodoBoton.textContent = 'Agregar al Carrito';
+  miNodoBoton.setAttribute('marcador', info.id);
+  miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
 
-        function anyadirProductoAlCarrito(evento) {
-          // Añadir el ID del producto al carrito
-          carrito.push(evento.target.getAttribute('marcador'));
+  // Insertamos
+  miNodoCardBody.appendChild(miNodoTitle);
+  miNodoCardBody.appendChild(miNodoImagen);
+  miNodoCardBody.appendChild(miNodoPrecio);
+  miNodoCardBody.appendChild(miNodoBoton);
+  miNodoCard.appendChild(miNodoCardBody);
+  miNodo.appendChild(miNodoCard);
+  DOMitems.appendChild(miNodo);
+});
+}
 
-          // Actualizar el contador del carrito
-          document.getElementById('cart-count').textContent = carrito.length;
-
-          // Renderizar el carrito
-          renderizarCarrito();
-         }
-  
-        function borrarItemCarrito(evento) {
-          const id = evento.target.dataset.item;
-          carrito = carrito.filter((carritoId) => {
-            return carritoId !== id;
-          });
-          renderizarCarrito();
-        }
-  
-        function calcularTotal() {
-          return carrito.reduce((total, item) => {
-            const miItem = baseDeDatos.filter((itemBaseDatos) => {
-              return itemBaseDatos.id === parseInt(item);
-            });
-            return total + miItem[0].precio;
-          }, 0).toFixed(0);
-        }
-  
-        function vaciarCarrito() {
-          carrito = [];
-          renderizarCarrito();
-        }
-  
-        // Eventos
-        DOMcartBtn.addEventListener('click', () => {
-          DOMcartContainer.style.display = DOMcartContainer.style.display === 'none' ? 'block' : 'none';
-        });
-  
-        // Inicio
-        renderizarProductos();
-      });
-    </script>
-  
-
-  <!-- Formulario de pedido -->
-  <div class="container my-5">
-    <h2 class="text-center mb-4">Realizar Pedido</h2>
-    <form id="orderForm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="name" required>
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Correo Electrónico</label>
-        <input type="email" class="form-control" id="email" required>
-      </div>
-      <div class="mb-3">
-        <label for="address" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="address" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Enviar Pedido</button>
-    </form>
-  </div>
-
-   <!-- Footer -->
-   <footer class="bg-dark text-light py-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <p>&copy; 2024 Food Champion Truck. Todos los derechos reservados.</p>
-          <p>Creadores: Juan Castro - Julio Muñoz - Bryan Piña</p>
-        </div>
-        <div class="col-md-6 text-end">
-          <p>Síguenos en redes sociales:</p>
-          <li class="list-inline-item"><a href="https://www.facebook.com"><img src="imagenes/facebook.png" alt="Facebook" style="width: 30px; height: 30px;"></a></li>
-          <li class="list-inline-item"><a href="https://twitter.com"><img src="imagenes/twitter.png" alt="Twitter" style="width: 30px; height: 30px;"></a></li>
-          <li class="list-inline-item"><a href="https://www.instagram.com"><img src="imagenes/instagram.png" alt="Instagram" style="width: 30px; height: 30px;"></a></li>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="app.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const realizarPedidoBtn = document.getElementById('realizarPedidoBtn');
-    const orderForm = document.getElementById('orderForm');
-
-    realizarPedidoBtn.addEventListener('click', () => {
-      // Desplazamiento suave hacia abajo de la página
-      orderForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+function renderizarCarrito() {
+DOMcarrito.textContent = '';
+const carritoSinDuplicados = [...new Set(carrito)];
+carritoSinDuplicados.forEach((item) => {
+  const miItem = baseDeDatos.filter((itemBaseDatos) => {
+    return itemBaseDatos.id === parseInt(item);
   });
+  const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+    return itemId === item ? total += 1 : total;
+  }, 0);
+  const miNodo = document.createElement('div');
+  miNodo.classList.add('row', 'mb-2');
+  miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+  const miBoton = document.createElement('button');
+  miBoton.classList.add('btn', 'btn-danger', 'ms-2');
+  miBoton.textContent = 'X';
+  miBoton.dataset.item = item;
+  miBoton.addEventListener('click', borrarItemCarrito);
+  miNodo.appendChild(miBoton);
+  DOMcarrito.appendChild(miNodo);
+});
+DOMtotal.textContent = calcularTotal();
+}
+
+function anyadirProductoAlCarrito(evento) {
+carrito.push(evento.target.getAttribute('marcador'));
+renderizarCarrito();
+DOMcartContainer.style.display = 'block';
+document.getElementById('cart-count').textContent = carrito.length;
+}
+
+function borrarItemCarrito(evento) {
+  const id = evento.target.dataset.item;
+  carrito = carrito.filter((carritoId) => {
+    return carritoId !== id;
+  });
+  renderizarCarrito();
+  document.getElementById('cart-count').textContent = carrito.length; // Actualizar el contador de productos
+}
+
+function calcularTotal() {
+return carrito.reduce((total, item) => {
+  const miItem = baseDeDatos.filter((itemBaseDatos) => {
+    return itemBaseDatos.id === parseInt(item);
+  });
+  return total + miItem[0].precio;
+}, 0).toFixed(0);
+}
+
+// Eventos
+DOMcartBtn.addEventListener('click', () => {
+DOMcartContainer.style.display = DOMcartContainer.style.display === 'none' ? 'block' : 'none';
+});
+
+closeCartBtn.addEventListener('click', () => {
+DOMcartContainer.style.display = 'none';
+});
+
+// Inicio
+renderizarProductos();
+});
+</script>
+
+
+<!-- Formulario de pedido -->
+<div class="container my-5">
+<h2 class="text-center mb-4">Realizar Pedido</h2>
+<form id="orderForm">
+<div class="mb-3">
+<label for="name" class="form-label">Nombre</label>
+<input type="text" class="form-control" id="name" required>
+</div>
+<div class="mb-3">
+<label for="email" class="form-label">Correo Electrónico</label>
+<input type="email" class="form-control" id="email" required>
+</div>
+<div class="mb-3">
+<label for="address" class="form-label">Dirección</label>
+<input type="text" class="form-control" id="address" required>
+</div>
+<button type="submit" class="btn btn-primary">Enviar Pedido</button>
+</form>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-light py-3">
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+<p>&copy; 2024 Food Champion Truck. Todos los derechos reservados.</p>
+<p>Creadores: Juan Castro - Julio Muñoz - Bryan Piña</p>
+</div>
+<div class="col-md-6 text-end">
+<p>Síguenos en redes sociales:</p>
+<li class="list-inline-item"><a href="https://www.facebook.com"><img src="imagenes/facebook.png" alt="Facebook" style="width: 30px; height: 30px;"></a></li>
+<li class="list-inline-item"><a href="https://twitter.com"><img src="imagenes/twitter.png" alt="Twitter" style="width: 30px; height: 30px;"></a></li>
+<li class="list-inline-item"><a href="https://www.instagram.com"><img src="imagenes/instagram.png" alt="Instagram" style="width: 30px; height: 30px;"></a></li>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const realizarPedidoBtn = document.getElementById('realizarPedidoBtn');
+const orderForm = document.getElementById('orderForm');
+
+realizarPedidoBtn.addEventListener('click', () => {
+orderForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+});
 </script>
 </body>
 </html>
