@@ -1,4 +1,4 @@
-/* Estilos personalizados */
+/*Estilos personalizados */
 
 
 
@@ -72,7 +72,7 @@ body {
 }
 /* PARA TODOS LOS H2 */
 h2 {
-  color: rgb(136, 101, 5);             /* Color del texto en blanco */
+  color: rgb(255, 255, 255);             /* Color del texto en blanco */
   font-weight: bold;        /* Texto en negrita */
   font-size: 42px;          /* Tamaño de texto más grande */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar la legibilidad */
@@ -81,6 +81,16 @@ h2 {
 /* Para el H2 de ubicacion*/
 .text-center.mb-3 {
   color: white; /* Establece el color del texto en blanco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega un sombreado al texto */
+}
+/*sobre nosotros*/
+.text-center.mb-4 {
+  color: rgb(0, 0, 0); /* Establece el color del texto en blanco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega un sombreado al texto */
+}
+/*nuestros productos*/
+.text-center.mb-6 {
+  color: rgb(255, 255, 255); /* Establece el color del texto en blanco */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega un sombreado al texto */
 }
 
@@ -183,3 +193,4 @@ h2 {
   .btn-carousel:hover {
     background-color: darkred; /* Cambio de color al pasar el mouse */
   }
+  
