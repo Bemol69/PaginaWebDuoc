@@ -78,6 +78,13 @@ h2 {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar la legibilidad */
 }
 
+h1 {
+  color: rgb(255, 255, 255);             /* Color del texto en blanco */
+  font-weight: bold;        /* Texto en negrita */
+  font-size: 42px;          /* Tamaño de texto más grande */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para mejorar la legibilidad */
+}
+
 /* Para el H2 de ubicacion*/
 .text-center.mb-3 {
   color: white; /* Establece el color del texto en blanco */
@@ -193,4 +200,3 @@ h2 {
   .btn-carousel:hover {
     background-color: darkred; /* Cambio de color al pasar el mouse */
   }
-  
