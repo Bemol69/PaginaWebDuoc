@@ -1,53 +1,55 @@
+const userReviewsElement = document.getElementById('user-reviews');
 
+function getRandomUsers() {
+    fetch('https://randomuser.me/api/?results=3')
+        .then(response => response.json())
+        .then(data => {
+            const users = data.results;
+            userReviewsElement.innerHTML = '';
 
-/* --- FORMULARIO SCRIPT */
-const registrationForm = document.getElementById('registrationForm');
-const registrationBtn = document.getElementById('registrationBtn');
-const validationMessages = document.getElementById('validationMessages');
+            users.forEach((user, index) => {
+                const name = `${user.name.first} ${user.name.last}`;
+                const review = `${generateRandomReview()}`;
+                const imageUrl = user.picture.large;
 
-registrationBtn.addEventListener('click', function(event) {
-    event.preventDefault();
-    const name = document.getElementById('form2Example11').value.trim();
-    const email = document.getElementById('form2Example12').value.trim();
-    const password = document.getElementById('form2Example22').value.trim();
-    let isValid = true;
-    validationMessages.style.display = 'none';
-    validationMessages.innerHTML = '';
+                const userReviewElement = document.createElement('div');
+                userReviewElement.classList.add('user-review');
+                userReviewElement.innerHTML = `
+                    <img class="user-image" src="${imageUrl}" alt="User Image">
+                    <div class="user-details">
+                        <h2>${name}</h2>
+                        <p>${review}</p>
+                    </div>
+                `;
 
-    // Validar nombre
-    if (name === '') {
-        isValid = false;
-        validationMessages.innerHTML += '<p>Por favor, ingresa tu nombre.</p>';
-    } else if (name.length < 8) { // Verificar si el nombretiene menos de 8 caracteres
-        isValid = false;
-        validationMessages.innerHTML += '<p>El nombre debe tener al menos 8 caracteres.</p>';
-    
-    }
+                userReviewElement.style.animationDelay = `${index * 2}s`;
+                userReviewsElement.appendChild(userReviewElement);
+            });
+        })
+        .catch(error => console.error(error));
+}
 
-    // Validar correo electrónico
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === '' || !emailRegex.test(email)) {
-        isValid = false;
-        validationMessages.innerHTML += '<p>Por favor, ingresa un correo electrónico válido de Gmail.</p>';
-    }
+function generateRandomReview() {
+    const reviews = [
+        'Excelente producto, lo recomiendo ampliamente.',
+        'No estoy satisfecho con la calidad, esperaba algo mejor.',
+        'Cumple con mis expectativas, buen servicio.',
+        'Podría mejorar en algunos aspectos, pero en general está bien.',
+        'Una experiencia decepcionante, no volveré a comprar aquí.'
+    ];
 
-    // Validar contraseña
-    if (password === '') {
-        isValid = false;
-        validationMessages.innerHTML += '<p>Por favor, ingresa una contraseña.</p>';
-    } else if (password.length < 8) { // Verificar si la contraseña tiene menos de 8 caracteres
-        isValid = false;
-        validationMessages.innerHTML += '<p>La contraseña debe tener al menos 8 caracteres.</p>';
-    }
+    return reviews[Math.floor(Math.random() * reviews.length)];
+}
 
-    if (isValid) {
-        // Redirigir a la página de confirmación
-        window.location.href = 'Confirmado.html';
-        alert('Correo enviado correctamente');
-    } else {
-        validationMessages.style.display = 'block';
+window.addEventListener('DOMContentLoaded', () => {
+    getRandomUsers();
+    const reviewsContainer = document.querySelector('.reviews-container');
+    const reviewBox = document.querySelector('.review-box');
+    const reviewContainer = document.querySelector('.review-container');
+    const containerHeight = reviewsContainer.offsetHeight;
+    const boxHeight = reviewBox.offsetHeight;
+
+    if (boxHeight < containerHeight) {
+        reviewContainer.style.height = `${containerHeight}px`;
     }
 });
-
-
-
