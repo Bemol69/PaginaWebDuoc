@@ -1,0 +1,35 @@
+/* Estilos para mejorar la visibilidad del carrito de compras */
+.bg-white {
+    background-color: white !important;
+}
+
+.p-4 {
+    padding: 1.5rem !important;
+}
+
+.rounded {
+    border-radius: 0.25rem !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* Otros estilos generales */
+body {
+    font-family: 'Bungee', cursive;
+}
+
+.navbar-brand {
+    font-family: 'Bungee', cursive;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+}
+
+.footer .list-inline-item a img {
+    width: 24px;
+    height: 24px;
+}

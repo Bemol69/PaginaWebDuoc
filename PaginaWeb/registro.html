@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styless.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <section class="gradient-form">
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card rounded-3 text-black">
+                        <div class="card-body p-4 p-md-5 mx-md-4">
+                            <div class="text-center mb-4">
+                                <img src="imagenes/logo.png" style="width: 185px;" alt="logo">
+                                <h4 class="mt-1 mb-3">¡Únete a Super Champion Truck!</h4>
+                            </div>
+                            <form action="process.php" method="POST" id="registrationForm">
+                                <p class="text-center">Por favor completa el formulario para registrarte</p>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="nombre_completo" name="nombre_completo" class="form-control" placeholder="Nombre completo" required>
+                                    <label class="form-label" for="nombre_completo">Nombre Completo</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="correo" name="correo" class="form-control" placeholder="Ej: usuario@gmail.com" required>
+                                    <label class="form-label" for="correo">Correo electrónico</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" required>
+                                    <label class="form-label" for="contrasena">Contraseña</label>
+                                </div>
+
+                                <div class="text-center pt-1 mb-5 pb-1">
+                                    <button type="submit" name="register" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Registrarse</button>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-center pb-4">
+                                    <p class="mb-0 me-2">¿Ya tienes una cuenta?</p>
+                                    <a href="ingreso.html" class="btn btn-outline-danger">Iniciar sesión</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Food Champion Truck. Todos los derechos reservados.</p>
+                    <p>Creadores: Juan Castro - Julio Muñoz - Bryan Piña</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Síguenos en redes sociales:</p>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com"><img src="imagenes/facebook.png" alt="Facebook" style="width: 30px; height: 30px;"></a></li>
+                        <li class="list-inline-item"><a href="https://twitter.com"><img src="imagenes/twitter.png" alt="Twitter" style="width: 30px; height: 30px;"></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com"><img src="imagenes/instagram.png" alt="Instagram" style="width: 30px; height: 30px;"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
