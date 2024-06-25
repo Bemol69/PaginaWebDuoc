@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "registro";
+$dbname = "usuarios";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,12 +13,16 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
-    $contrasena = $_POST['contrasena'];
+    $nombre_completo = $_POST['nombre_completo'];
+    $correo = $_POST['correo'];
+    $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT); // Hashear la contraseña
 
-    $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $nombre, $email, $contrasena);
+    $stmt = $conn->prepare("INSERT INTO usuarios (nombre_completo, correo, contrasena) VALUES (?, ?, ?)");
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
+
+    $stmt->bind_param("sss", $nombre_completo, $correo, $contrasena);
 
     if ($stmt->execute()) {
         echo "Registro exitoso";

@@ -1,17 +1,35 @@
-document.getElementById('registrationForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('form');
+  if (form) {
+      form.addEventListener('submit', function(e) {
+          e.preventDefault();
 
-  const formData = new FormData(this);
+          const formData = new FormData(this);
+          const isLoginForm = this.id === 'loginForm';
+          const url = isLoginForm ? 'login.php' : 'process.php';
 
-  fetch('process.php', {
-      method: 'POST',
-      body: formData
-  })
-  .then(response => response.text())
-  .then(data => {
-      alert(data);
-      document.getElementById('registrationForm').reset();
-      window.location.href = 'ingreso.html';
-  })
-  .catch(error => console.error('Error:', error));
+          fetch(url, {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.text())
+          .then(data => {
+              if (isLoginForm) {
+                  if (data === "success") {
+                      alert("Inicio de sesión exitoso");
+                      window.location.href = 'index.html';
+                  } else {
+                      alert(data);
+                  }
+              } else {
+                  alert(data);
+                  if (data === "Registro exitoso") {
+                      window.location.href = 'inicio.html';
+                  }
+              }
+              form.reset();
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  }
 });
