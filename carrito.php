@@ -4,10 +4,12 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "food_champion_truck";
+$dbname = "food_champion_db";
+
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 
 // Verificar conexión
 if ($conn->connect_error) {

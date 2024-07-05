@@ -2,7 +2,8 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "usuarios";
+$dbname = "food_champion_db";
+
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

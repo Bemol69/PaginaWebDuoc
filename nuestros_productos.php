@@ -1,8 +1,10 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "food_champion_truck";
+$dbname = "food_champion_db";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -55,10 +57,9 @@ $result = $conn->query($sql);
           <li class="nav-item">
             <a class="nav-link" href="reseña.html">Reseñas</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ver_carrito.php">Carrito</a>
           </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ver_carrito.php">Carrito</a>
-      </li>
         </ul>
       </div>
     </div>
